@@ -1,0 +1,277 @@
+========================================================================
+  CyberAdapt-LLM — Baseline vs Adapted Comparison Report
+  Phase 6 Evaluation
+========================================================================
+
+  IMPORTANT: All scores produced by our own experiments.
+  No scores were copied from any research paper.
+
+  Generated : 2026-08-10 19:13:12
+  Base model: distilgpt2
+  Adapted   : D:\PROJECTS\haripriya\models\adapted\exp_20260810_185910_f28a\final
+
+========================================================================
+
+  AGGREGATE STATISTICS
+  --------------------------------------------------------------------
+  Metric                                      Base      Adapted
+  --------------------------------------------------------------------
+  MCQ questions                                 20           20
+  MCQ correct                                    0            0
+  MCQ accuracy                              0.0000       0.0000
+  MCQ macro precision                       0.0000       0.0000
+  MCQ macro recall                          0.0000       0.0000
+  MCQ macro F1                              0.0000       0.0000
+  Gen keyword recall (mean)                 0.2111       0.1911
+  Mean reference PPL                       1029.51       958.72
+  Mean latency (ms)                         4933.8       4652.4
+  P95 latency (ms)                         13085.8      12391.1
+  --------------------------------------------------------------------
+
+
+  PER-QUESTION RESULTS
+  --------------------------------------------------------------------
+
+  -- Multiple-Choice Questions --
+
+  [mcq_001] (web_security, medium)
+  Q: Which of the following BEST describes a SQL injection attack?
+  Expected     : B
+  Base answer  :  A  [WRONG  ]  (4802ms)  raw='The following is a simple SQL injection attack.
+The followin'
+  Adapted ans  :  A  [WRONG  ]  (3064ms)  raw='A) Injecting malicious JavaScript into a webpage viewed by o'
+
+  [mcq_002] (web_security, medium)
+  Q: Which type of Cross-Site Scripting (XSS) attack stores the malicious script permanently on the target server?
+  Expected     : C
+  Base answer  : UNKNOWN  [WRONG  ]  (2065ms)  raw='The answer is:
+The answer is:
+The answer is:
+The answer is:'
+  Adapted ans  : UNKNOWN  [WRONG  ]  (2019ms)  raw='The answer is:
+The answer is:
+The answer is:
+The answer is:'
+
+  [mcq_003] (memory_security, hard)
+  Q: A buffer overflow vulnerability is most directly caused by:
+  Expected     : B
+  Base answer  :  A  [WRONG  ]  (2194ms)  raw='The buffer overflow vulnerability is most directly caused by'
+  Adapted ans  :  A  [WRONG  ]  (1337ms)  raw='A) Using weak encryption algorithms
+B) Using weak encryption'
+
+  [mcq_004] (cryptography, easy)
+  Q: Which property of a cryptographic hash function ensures it is computationally infeasible to find two different inputs that produce the same hash output?
+  Expected     : B
+  Base answer  : UNKNOWN  [WRONG  ]  (3311ms)  raw='The first preimage resistance is the same as the second prei'
+  Adapted ans  : UNKNOWN  [WRONG  ]  (2941ms)  raw='The correct answer is:
+The correct answer is:
+The correct an'
+
+  [mcq_005] (network_security, easy)
+  Q: What does the principle of CIA triad stand for in cybersecurity?
+  Expected     : B
+  Base answer  :  A  [WRONG  ]  (2681ms)  raw='The principle of CIA triad is that the government is not a t'
+  Adapted ans  : UNKNOWN  [WRONG  ]  (2658ms)  raw='The principle of CIA triad is that the security of the Inter'
+
+  [mcq_006] (vulnerability_management, medium)
+  Q: What is a zero-day vulnerability?
+  Expected     : C
+  Base answer  :  A  [WRONG  ]  (2693ms)  raw='The vulnerability is not a zero-day vulnerability.
+The vulne'
+  Adapted ans  :  A  [WRONG  ]  (2741ms)  raw='The vulnerability is not a zero-day vulnerability.
+The vulne'
+
+  [mcq_007] (network_security, easy)
+  Q: Which network layer does a stateful firewall primarily inspect?
+  Expected     : C
+  Base answer  : UNKNOWN  [WRONG  ]  (2701ms)  raw='Layer 1 is the layer that is the most secure.
+Layer 2 is the'
+  Adapted ans  : UNKNOWN  [WRONG  ]  (2679ms)  raw='Layer 1 is the layer that is the firewall. Layer 2 is the la'
+
+  [mcq_008] (authentication, easy)
+  Q: Which of the following is an example of 'something you have' in multi-factor authentication?
+  Expected     : C
+  Base answer  :  A  [WRONG  ]  (3155ms)  raw='A password is a valid one.
+A password is a valid one.
+A pass'
+  Adapted ans  :  A  [WRONG  ]  (3015ms)  raw='A password is a valid one.
+A password is a valid one.
+A pass'
+
+  [mcq_009] (malware, medium)
+  Q: Ransomware typically achieves its primary goal by:
+  Expected     : B
+  Base answer  : UNKNOWN  [WRONG  ]  (2732ms)  raw='The attacker can't decrypt the user's data.
+The attacker can'
+  Adapted ans  : UNKNOWN  [WRONG  ]  (2874ms)  raw='The attacker can't decrypt the user's data.
+The attacker can'
+
+  [mcq_010] (access_control, easy)
+  Q: The principle of least privilege states that:
+  Expected     : B
+  Base answer  :  A  [WRONG  ]  (2703ms)  raw='The principle of least privilege states that:
+A) All users s'
+  Adapted ans  :  A  [WRONG  ]  (2864ms)  raw='The principle of least privilege states that:
+A) All users s'
+
+  [mcq_011] (web_security, medium)
+  Q: According to OWASP Top 10 2021, what is the #1 web application security risk?
+  Expected     : C
+  Base answer  : UNKNOWN  [WRONG  ]  (2698ms)  raw='The answer is:
+The answer is:
+The answer is:
+The answer is:'
+  Adapted ans  : UNKNOWN  [WRONG  ]  (2696ms)  raw='The answer is:
+The answer is:
+The answer is:
+The answer is:'
+
+  [mcq_012] (cryptography, medium)
+  Q: Which key is used to encrypt data when using asymmetric (public-key) cryptography for confidentiality?
+  Expected     : C
+  Base answer  :  A  [WRONG  ]  (3399ms)  raw='A) The sender's private key
+E) The sender's public key
+F) Th'
+  Adapted ans  :  A  [WRONG  ]  (3041ms)  raw='A) The sender's private key
+E) The sender's public key
+F) Th'
+
+  [mcq_013] (network_security, medium)
+  Q: What is the primary purpose of a SIEM (Security Information and Event Management) system?
+  Expected     : C
+  Base answer  :  A  [WRONG  ]  (2715ms)  raw='The SIEM is a system that is designed to protect the user fr'
+  Adapted ans  :  A  [WRONG  ]  (2689ms)  raw='The SIEM is a system that is designed to protect the user an'
+
+  [mcq_014] (social_engineering, easy)
+  Q: Which social engineering technique involves an attacker posing as a trusted entity via email to trick a victim into revealing credentials?
+  Expected     : C
+  Base answer  :  A  [WRONG  ]  (2621ms)  raw='The attacker is posing as a trusted entity via email to tric'
+  Adapted ans  :  A  [WRONG  ]  (2690ms)  raw='The attacker is posing as a trusted entity via email to tric'
+
+  [mcq_015] (vulnerability_management, medium)
+  Q: What does CVE stand for in cybersecurity?
+  Expected     : B
+  Base answer  : UNKNOWN  [WRONG  ]  (2625ms)  raw='CVE-2017-12-17
+CVE-2017-12-17
+CVE-2017-12-17
+CVE-2017-12-17'
+  Adapted ans  : UNKNOWN  [WRONG  ]  (2777ms)  raw='CVE-2017-1201
+CVE-2017-1201
+CVE-2017-1201
+CVE-2017-1201
+CVE-'
+
+  [mcq_016] (attack_frameworks, medium)
+  Q: In the MITRE ATT&CK framework, which tactic describes an attacker's attempts to steal credentials?
+  Expected     : C
+  Base answer  :  A  [WRONG  ]  (3012ms)  raw='The attacker has a valid credential.
+The attacker has a vali'
+  Adapted ans  :  A  [WRONG  ]  (3071ms)  raw='The attacker has a valid credential.
+The attacker has a vali'
+
+  [mcq_017] (network_security, medium)
+  Q: Which protocol provides secure, authenticated, and encrypted communication over TCP/IP networks and is commonly used for remote shell access?
+  Expected     : C
+  Base answer  : UNKNOWN  [WRONG  ]  (2569ms)  raw='The answer is:
+The answer is:
+The answer is:
+The answer is:'
+  Adapted ans  : UNKNOWN  [WRONG  ]  (2634ms)  raw='The answer is:
+The answer is:
+The answer is:
+The answer is:'
+
+  [mcq_018] (incident_response, hard)
+  Q: During an incident response, in which phase would a security team work to remove the attacker's foothold from affected systems?
+  Expected     : C
+  Base answer  :  A  [WRONG  ]  (2723ms)  raw='The attacker is not a security team.
+The attacker is not a s'
+  Adapted ans  :  A  [WRONG  ]  (2693ms)  raw='The attacker is not a security team.
+The attacker is not a s'
+
+  [mcq_019] (web_security, hard)
+  Q: An attacker forges a request from a victim's browser to a web application where the victim is authenticated. This attack is known as:
+  Expected     : B
+  Base answer  :  A  [WRONG  ]  (2769ms)  raw='The attacker is using a cross-site scripting (XSS) attack.
+T'
+  Adapted ans  :  A  [WRONG  ]  (2731ms)  raw='The attacker is using a cross-site scripting (XSS) attack.
+T'
+
+  [mcq_020] (cryptography, medium)
+  Q: Which of the following hash algorithms is considered cryptographically broken and should NOT be used for security purposes?
+  Expected     : C
+  Base answer  : UNKNOWN  [WRONG  ]  (3749ms)  raw='SHA-256.
+The correct answer is: SHA-256.
+The correct answer'
+  Adapted ans  : UNKNOWN  [WRONG  ]  (3123ms)  raw='SHA-256.
+The correct answer is: SHA-256.
+The correct answer'
+
+  -- Generative Questions --
+
+  [gen_001] (web_security, medium)
+  Q: Explain what SQL injection is, give a simple example, and describe two prevention techniques.
+  Base  → keyword_recall=0.2222  matched=['sql', 'injection']  (12339ms)
+         response: 'Explain what SQL injection is, give a simple example, and describe two prevention techniques.
+Answer'
+  Adapted → keyword_recall=0.2222  matched=['sql', 'injection']  (12145ms)
+           response: 'Explain what SQL injection is, give a simple example, and describe two prevention techniques.
+Answer'
+
+  [gen_002] (network_security, medium)
+  Q: What is a buffer overflow vulnerability and how can it lead to code execution?
+  Base  → keyword_recall=0.2  matched=['buffer', 'overflow']  (14502ms)
+         response: 'The buffer overflow vulnerability is a vulnerability that is not present in the code. The buffer ove'
+  Adapted → keyword_recall=0.2  matched=['buffer', 'overflow']  (12404ms)
+           response: 'The buffer overflow vulnerability is a vulnerability that is not present in the code. The buffer ove'
+
+  [gen_003] (access_control, easy)
+  Q: Explain the principle of least privilege and why it is important in cybersecurity.
+  Base  → keyword_recall=0.3333  matched=['least', 'privilege', 'security']  (12163ms)
+         response: 'Explain the principle of least privilege and why it is important in cybersecurity.
+Answer: Explain t'
+  Adapted → keyword_recall=0.3333  matched=['least', 'privilege', 'security']  (12371ms)
+           response: 'Explain the principle of least privilege and why it is important in cybersecurity.
+Answer: Explain t'
+
+  [gen_004] (cryptography, hard)
+  Q: Describe how TLS (Transport Layer Security) establishes a secure connection using the TLS handshake.
+  Base  → keyword_recall=0.2  matched=['tls', 'handshake']  (13086ms)
+         response: 'The TLS handshake is a protocol that allows the user to send and receive messages from the TLS hands'
+  Adapted → keyword_recall=0.2  matched=['tls', 'handshake']  (12661ms)
+           response: 'The TLS handshake is a protocol that allows the user to send and receive information from the TLS ha'
+
+  [gen_005] (malware, medium)
+  Q: What is ransomware and what steps should an organization take to defend against it?
+  Base  → keyword_recall=0.1  matched=['ransomware']  (13338ms)
+         response: 'The first step is to take a look at the following steps:
+1. Determine the type of ransomware that is'
+  Adapted → keyword_recall=0.0  matched=[]  (12391ms)
+           response: 'The first step is to take steps to protect against it.
+Answer: The second step is to take steps to p'
+
+========================================================================
+
+  INTERPRETATION NOTES
+  --------------------------------------------------------------------
+  1. distilgpt2 is a 82M-param model trained on general web text.
+     It is not instruction-tuned and does not reliably output 'A/B/C/D'
+     for MCQ prompts. Low MCQ accuracy is therefore expected for BOTH models.
+
+  2. The adapted model was trained on a SMALL sample corpus for very few
+     steps (smoke-test). Meaningful accuracy improvement requires:
+       - A larger cybersecurity corpus (thousands of documents)
+       - Full training (3+ epochs on GPU)
+       - A larger or instruction-tuned base model
+
+  3. 'Keyword recall' for generative questions measures whether
+     domain-relevant terms appear in the output — NOT answer quality.
+     Use human evaluation for production quality assessment.
+
+  4. Reference perplexity measures model surprise on expert answers.
+     Lower perplexity = model finds expert answers more natural.
+     Compare base vs adapted PPL to see domain adaptation effect.
+
+  DO NOT interpret these results as final production benchmark scores.
+========================================================================

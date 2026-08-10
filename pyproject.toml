@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "cyberadapt-llm"
+version = "0.1.0"
+description = "Resource-Efficient Cybersecurity Domain Adaptation for LLMs"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "haripriyak2006" }]
+keywords = ["cybersecurity", "llm", "domain-adaptation", "rag", "nlp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-v --tb=short"
+markers = [
+    "slow: marks tests that require the LLM and RAG vector store to be loaded (deselect with '-m not slow')",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning:starlette",
+    "ignore::pytest.PytestUnknownMarkWarning",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["backend", "training", "rag", "evaluation"]

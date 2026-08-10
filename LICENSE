@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 haripriya_k
+Copyright (c) 2026 haripriyak2006
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+NOTE: Model weights and datasets used in this project retain their own
+licenses (e.g., Meta LLaMA Community License, Mistral AI Terms of Service,
+HuggingFace dataset cards). Using this code does not grant rights to those
+resources. Consult each resource's license before use.

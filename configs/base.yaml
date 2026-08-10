@@ -1,0 +1,58 @@
+# configs/base.yaml
+# Base application and API configuration.
+# All values can be overridden by environment variables or .env.
+
+app:
+  name: "CyberAdapt-LLM"
+  version: "0.1.0"
+  phase: 1
+  env: "development"          # development | staging | production
+  host: "0.0.0.0"
+  port: 8000
+  log_level: "INFO"
+
+api:
+  prefix: "/api/v1"
+  cors_origins:
+    - "http://localhost:3000"
+    - "http://localhost:5173"
+  request_timeout: 60         # seconds
+
+model:
+  # Phase 2: small CPU-friendly default. Change via BASE_MODEL_NAME env var.
+  # Larger options: TinyLlama/TinyLlama-1.1B-Chat-v1.0  |  gpt2  |  microsoft/phi-2
+  base_model_name: "distilgpt2"
+  model_cache_dir: "./models/base"
+  adapted_model_dir: "./models/adapted"
+  device: "auto"              # auto | cpu | cuda | mps
+  max_new_tokens: 256
+  temperature: 0.7
+  top_p: 0.9
+  use_half_precision: false   # true only has effect on CUDA
+  load_in_8bit: false
+  load_in_4bit: false
+
+data:
+  raw_data_dir: "./data/raw"
+  processed_data_dir: "./data/processed"
+  dataset_dir: "./data/datasets"
+  max_seq_length: 2048
+
+rag:
+  vector_store_path: "./data/datasets/faiss_index"
+  embedding_model_id: "sentence-transformers/all-MiniLM-L6-v2"
+  retrieval_top_k: 5
+  chunk_size: 512
+  chunk_overlap: 64
+
+tokenization:
+  # Phase 4: tokenization pipeline settings
+  corpus_file: "./data/processed/cybersecurity_corpus.jsonl"
+  tokenized_data_dir: "./data/datasets/tokenized"
+  max_sequence_length: 1024      # tokens per training sequence (configurable via MAX_SEQUENCE_LENGTH)
+  train_split_ratio: 0.9         # 90% train, 10% validation
+  seed: 42                       # random seed for reproducibility
+  add_eos_between_docs: true     # insert EOS token between concatenated documents
+
+evaluation:
+  output_dir: "./evaluation/results"
