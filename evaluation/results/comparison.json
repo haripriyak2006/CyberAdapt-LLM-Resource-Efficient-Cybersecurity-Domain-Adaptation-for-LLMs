@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-08-10T13:43:12.388327+00:00",
+  "caveat": "All scores from our experiments only. No scores copied from research papers.",
+  "base": {
+    "model": "distilgpt2",
+    "mcq_accuracy": 0.0,
+    "mcq_macro_f1": 0.0,
+    "gen_keyword_recall": 0.2111,
+    "mean_reference_ppl": 1029.5149,
+    "mean_latency_ms": 4933.76
+  },
+  "adapted": {
+    "model": "D:\\PROJECTS\\haripriya\\models\\adapted\\exp_20260810_185910_f28a\\final",
+    "mcq_accuracy": 0.0,
+    "mcq_macro_f1": 0.0,
+    "gen_keyword_recall": 0.1911,
+    "mean_reference_ppl": 958.7165,
+    "mean_latency_ms": 4652.36
+  },
+  "delta": {
+    "mcq_accuracy_delta": 0,
+    "gen_recall_delta": -0.02,
+    "ppl_delta": -70.7984
+  }
+}

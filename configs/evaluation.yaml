@@ -1,0 +1,41 @@
+# configs/evaluation.yaml
+# Evaluation framework configuration.
+# Phase 6 — metrics and benchmark settings.
+
+evaluation:
+  output_dir: "./evaluation/results"
+  seed: 42
+  batch_size: 8
+
+metrics:
+  - perplexity
+  - bleu
+  - rouge_l
+  - exact_match
+  - f1
+
+benchmarks:
+  cybersecurity_qa:
+    enabled: true
+    dataset_path: "./evaluation/datasets/cybersecurity_qa.json"
+    max_samples: 500
+    temperature: 0.0           # greedy for reproducibility
+
+  threat_classification:
+    enabled: true
+    dataset_path: "./evaluation/datasets/threat_classification.json"
+    max_samples: 200
+
+  vulnerability_description:
+    enabled: true
+    dataset_path: "./evaluation/datasets/vuln_description.json"
+    max_samples: 200
+
+comparison:
+  models:
+    - label: "base"
+      model_path: "./models/base"
+    - label: "adapted"
+      model_path: "./models/adapted"
+  save_predictions: true
+  report_format: "json"       # json | csv | markdown

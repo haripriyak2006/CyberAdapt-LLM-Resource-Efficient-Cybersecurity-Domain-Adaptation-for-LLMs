@@ -1,0 +1,74 @@
+# ── Python ─────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ── Virtual environments ────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Secrets / environment ───────────────────────────────────────────────────
+.env
+*.pem
+*.key
+secrets/
+
+# ── Model weights & large binaries ─────────────────────────────────────────
+models/base/
+models/adapted/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+*.gguf
+
+# ── Data (large files live outside git) ────────────────────────────────────
+data/raw/
+data/processed/
+data/datasets/
+*.jsonl
+*.parquet
+*.arrow
+*.csv
+
+# ── Vector stores ───────────────────────────────────────────────────────────
+*.faiss
+*.index
+chroma/
+
+# ── Logs & caches ───────────────────────────────────────────────────────────
+logs/
+*.log
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# ── IDE / OS ─────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Jupyter ─────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── HuggingFace cache ────────────────────────────────────────────────────────
+~/.cache/huggingface/

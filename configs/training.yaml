@@ -1,0 +1,70 @@
+# configs/training.yaml
+# Domain-Adaptive Continuous Pretraining (DACP) hyperparameters.
+# Phase 5 — CyberAdapt-LLM
+#
+# All values are overridable via environment variables or CLI flags.
+# Conservative defaults are set for CPU smoke-testing.
+# GPU-recommended values are shown in comments.
+
+training:
+  # ── Output ───────────────────────────────────────────────────────────────────
+  output_dir: "./models/adapted"         # Root dir; each run gets a unique subdir
+
+  # ── Epochs and batch size ─────────────────────────────────────────────────────
+  num_train_epochs: 3                    # GPU rec: 3-5 | CPU smoke-test: 1
+  per_device_train_batch_size: 1         # GPU rec: 4-8 | CPU: 1
+  per_device_eval_batch_size: 1          # GPU rec: 4   | CPU: 1
+
+  # ── Optimization ─────────────────────────────────────────────────────────────
+  gradient_accumulation_steps: 8         # effective batch = batch_size * grad_accum
+  learning_rate: 2.0e-5                  # conservative; paper values: 1e-4 to 5e-5
+  lr_scheduler_type: "cosine"            # cosine | linear | constant_with_warmup
+  warmup_ratio: 0.06                     # fraction of total steps for LR warmup
+  weight_decay: 0.01                     # AdamW weight decay
+  max_grad_norm: 1.0                     # gradient clipping max norm
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_epsilon: 1.0e-8
+
+  # ── Precision ─────────────────────────────────────────────────────────────────
+  # fp16: NVIDIA GPUs (V100, T4, A100, RTX series)
+  # bf16: Ampere+ GPUs (A100, RTX 3090+) — more numerically stable than fp16
+  # Both false: CPU or MPS (Apple Silicon)
+  fp16: false
+  bf16: false
+
+  # ── Checkpointing ─────────────────────────────────────────────────────────────
+  save_steps: 100                        # save checkpoint every N optimizer steps
+  save_total_limit: 3                    # keep only the last N checkpoints
+  load_best_model_at_end: true           # restore best val-loss checkpoint at end
+  metric_for_best_model: "eval_loss"
+  greater_is_better: false
+
+  # ── Evaluation ────────────────────────────────────────────────────────────────
+  evaluation_strategy: "steps"           # steps | epoch
+  eval_steps: 100                        # evaluate every N steps
+
+  # ── Logging ───────────────────────────────────────────────────────────────────
+  logging_steps: 10                      # log metrics every N steps
+  logging_first_step: true
+  report_to: "none"                      # none | tensorboard | wandb
+
+  # ── Sequence length ───────────────────────────────────────────────────────────
+  # Must match the value used in tokenize_dataset.py.
+  # Will be read from tokenization_stats.json automatically if not set here.
+  max_sequence_length: 128               # default for sample data; set 1024 for GPU
+
+  # ── Reproducibility ───────────────────────────────────────────────────────────
+  seed: 42
+  data_seed: 42
+
+  # ── Dataloader ────────────────────────────────────────────────────────────────
+  dataloader_num_workers: 0              # 0 = main process (required on Windows)
+  dataloader_pin_memory: false           # true only with CUDA
+
+  # ── CPU smoke-test ────────────────────────────────────────────────────────────
+  # When --smoke-test is passed, these override the values above.
+  smoke_test_epochs: 1
+  smoke_test_batch_size: 1
+  smoke_test_grad_accum: 1
+  smoke_test_max_steps: 5               # train only 5 steps total
