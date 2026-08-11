@@ -38,15 +38,23 @@ models/adapted/
 data/raw/
 data/processed/
 data/datasets/
-*.jsonl
 *.parquet
 *.arrow
 *.csv
+
+# Keep sample JSONL files (small, useful for demo); ignore large data JSONL
+# Add any large JSONL explicitly if needed:
+# data/processed/*.jsonl
 
 # ── Vector stores ───────────────────────────────────────────────────────────
 *.faiss
 *.index
 chroma/
+
+# ── Evaluation results (generated, not source) ─────────────────────────────
+evaluation/results/
+# Allow the results directory structure but not JSON outputs
+!evaluation/results/.gitkeep
 
 # ── Logs & caches ───────────────────────────────────────────────────────────
 logs/
@@ -72,3 +80,14 @@ desktop.ini
 
 # ── HuggingFace cache ────────────────────────────────────────────────────────
 ~/.cache/huggingface/
+
+# ── Node / Frontend ──────────────────────────────────────────────────────────
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.turbo/
+frontend/.vercel/
+
+# ── Docker ───────────────────────────────────────────────────────────────────
+# docker-compose.override.yml  (keep docker-compose.yml in git)
+

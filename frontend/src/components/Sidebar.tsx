@@ -10,6 +10,7 @@ const nav = [
   { href: '/document',      label: 'Doc Analyzer',   icon: '📄' },
   { href: '/evaluation',    label: 'Evaluation',     icon: '📊' },
   { href: '/report',        label: 'Report',         icon: '📋' },
+  { href: '/demo',          label: 'Live Comparison',icon: '⚡' },
 ];
 
 export default function Sidebar() {
@@ -44,7 +45,7 @@ export default function Sidebar() {
 
       {/* Footer */}
       <div className="sidebar-footer">
-        <div className="phase-badge">Phase 10</div>
+        <div className="phase-badge">Phase 11</div>
         <div style={{ marginTop: 6, fontSize: 10, color: 'var(--text-3)' }}>
           Defensive use only
         </div>

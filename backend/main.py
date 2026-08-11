@@ -34,6 +34,7 @@ from backend.api import cyber_chat as cyber_chat_router
 from backend.api import model_info as model_info_router
 from backend.api import evaluation as evaluation_router
 from backend.api import system_metrics as metrics_router
+from backend.api import demo as demo_router
 from backend.core.config import get_settings
 from backend.core.logging_config import configure_logging
 from backend.core.middleware import RequestIDMiddleware, RequestLoggingMiddleware
@@ -179,6 +180,10 @@ def create_app() -> FastAPI:
     app.include_router(model_info_router.router,  prefix=_API_PREFIX)   # GET  /api/model/info
     app.include_router(evaluation_router.router,  prefix=_API_PREFIX)   # GET  /api/evaluation/results
     app.include_router(metrics_router.router,     prefix=_API_PREFIX)   # GET  /api/metrics
+
+    # Phase 11 — Live Model Comparison demo
+    app.include_router(demo_router.router,        prefix=_API_PREFIX)   # GET  /api/demo/questions
+                                                                         # POST /api/demo/compare
 
     # Compatibility alias: /api/vulnerability/analyze → same router as vuln
     # (Phase 9 spec uses 'vulnerability' instead of 'vuln')

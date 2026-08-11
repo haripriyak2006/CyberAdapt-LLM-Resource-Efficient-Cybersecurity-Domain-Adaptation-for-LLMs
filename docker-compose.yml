@@ -1,0 +1,51 @@
+# CyberAdapt-LLM — Docker Compose
+
+services:
+  # ── FastAPI Backend ───────────────────────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: cyberadapt-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Model weights and data are bind-mounted so they are never baked into
+      # the image (they can be gigabytes and must not be committed to git)
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./.env:/app/.env:ro
+    environment:
+      APP_ENV: development
+      APP_PORT: "8000"
+      DEVICE: cpu           # change to cuda for GPU
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+    networks:
+      - cyberadapt-net
+
+  # ── Next.js Frontend ──────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: cyberadapt-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - cyberadapt-net
+
+networks:
+  cyberadapt-net:
+    driver: bridge

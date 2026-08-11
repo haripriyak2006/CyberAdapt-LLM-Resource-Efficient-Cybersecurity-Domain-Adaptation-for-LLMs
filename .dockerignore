@@ -1,0 +1,15 @@
+.venv/
+models/
+data/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+*.gguf
+*.faiss
+*.index
+*.log
+__pycache__/
+.pytest_cache/
+.env

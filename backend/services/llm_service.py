@@ -31,39 +31,43 @@ class LLMServiceError(Exception):
 
 # ── Singleton loader ──────────────────────────────────────────────────────────
 
-_loader = None  # type: ignore[assignment]
-_loader_error: Optional[str] = None  # set if the loader failed to initialise
+_loaders: dict[str, "ModelLoader"] = {}
+_loader_errors: dict[str, str] = {}
 
 
-def _get_loader():
-    """Return the shared ModelLoader, initialising it on first call."""
-    global _loader, _loader_error
+def _get_loader(model_name: Optional[str] = None):
+    """Return the shared ModelLoader for a specific model, initialising it on first call."""
+    global _loaders, _loader_errors
+    
+    settings = get_settings()
+    target_model = model_name or settings.base_model_name
 
-    if _loader is not None:
-        return _loader
+    if target_model in _loaders:
+        return _loaders[target_model]
 
-    if _loader_error is not None:
-        raise LLMServiceError(_loader_error)
+    if target_model in _loader_errors:
+        raise LLMServiceError(_loader_errors[target_model])
 
     try:
         from models.model_loader import ModelLoader
 
-        settings = get_settings()
-        logger.info("Initialising ModelLoader with model: %s", settings.base_model_name)
+        logger.info("Initialising ModelLoader with model: %s", target_model)
 
-        _loader = ModelLoader(
-            model_name=settings.base_model_name,
+        loader = ModelLoader(
+            model_name=target_model,
             cache_dir=settings.model_cache_dir,
             device=settings.device,
             max_new_tokens=settings.max_new_tokens,
             temperature=settings.temperature,
         )
-        return _loader
+        _loaders[target_model] = loader
+        return loader
 
     except Exception as exc:
-        _loader_error = f"Model loader failed to initialise: {type(exc).__name__}"
-        logger.exception("ModelLoader init failed: %s", exc)
-        raise LLMServiceError(_loader_error) from exc
+        err = f"Model loader failed to initialise for {target_model}: {type(exc).__name__}"
+        _loader_errors[target_model] = err
+        logger.exception("ModelLoader init failed for %s: %s", target_model, exc)
+        raise LLMServiceError(err) from exc
 
 
 # ── Public API ────────────────────────────────────────────────────────────────
@@ -72,6 +76,7 @@ def generate_response(
     prompt: str,
     max_tokens: Optional[int] = None,
     temperature: Optional[float] = None,
+    model_name: Optional[str] = None,
 ) -> dict:
     """
     Generate a model response for the given prompt.
@@ -80,6 +85,7 @@ def generate_response(
         prompt:      The user's text prompt.
         max_tokens:  Override max new tokens for this request.
         temperature: Override sampling temperature for this request.
+        model_name:  Optional specific model to load (defaults to base_model_name).
 
     Returns:
         dict with keys: ``response``, ``model``, ``latency_ms``
@@ -90,7 +96,7 @@ def generate_response(
     if not prompt or not prompt.strip():
         raise LLMServiceError("Prompt must not be empty.")
 
-    loader = _get_loader()
+    loader = _get_loader(model_name)
 
     t0 = time.perf_counter()
     try:
@@ -121,19 +127,25 @@ def generate_response(
     }
 
 
-def get_model_status() -> dict:
+def get_model_status(model_name: Optional[str] = None) -> dict:
     """
     Return current model loading status.
     Safe to call at any time (never triggers a load).
     """
-    global _loader, _loader_error
-    if _loader_error:
-        return {"loaded": False, "error": _loader_error, "model": None, "device": None}
-    if _loader is None:
+    global _loaders, _loader_errors
+    settings = get_settings()
+    target_model = model_name or settings.base_model_name
+
+    if target_model in _loader_errors:
+        return {"loaded": False, "error": _loader_errors[target_model], "model": None, "device": None}
+    
+    loader = _loaders.get(target_model)
+    if loader is None:
         return {"loaded": False, "error": None, "model": None, "device": None}
+    
     return {
-        "loaded": _loader.is_loaded,
+        "loaded": loader.is_loaded,
         "error": None,
-        "model": _loader.model_name,
-        "device": _loader.device,
+        "model": loader.model_name,
+        "device": loader.device,
     }

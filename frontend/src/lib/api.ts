@@ -160,6 +160,39 @@ export interface SecurityReport {
   disclaimer: string;
 }
 
+// ── Demo / Live Comparison types ────────────────────────────────────────────
+
+export interface DemoQuestion {
+  id: string;
+  category: string;
+  question: string;
+  rationale: string;
+}
+
+export interface ModelResult {
+  answer: string;
+  model: string;
+  latency_ms: number;
+  error?: string | null;
+  adapted_model_available?: boolean;
+}
+
+export interface CompareEvidence {
+  sources: EvidenceSource[];
+  evidence_sufficient: boolean;
+  num_chunks: number;
+}
+
+export interface CompareResponse {
+  question: string;
+  base: ModelResult;
+  adapted: ModelResult;
+  evidence: CompareEvidence;
+  difference_summary: string;
+  total_latency_ms: number;
+  disclaimer: string;
+}
+
 // ── API functions ───────────────────────────────────────────────────────────
 export const api = {
   getHealth:           () => apiFetch<HealthResponse>('/health'),
@@ -216,4 +249,14 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ incident_description, affected_assets, analyst_name, organization, top_k }),
     }),
+
+  // Phase 11 — Live Comparison
+  getDemoQuestions: () =>
+    apiFetch<DemoQuestion[]>('/api/demo/questions'),
+
+  compareModels: (question: string, top_k = 3) =>
+    apiFetch<CompareResponse>('/api/demo/compare', {
+      method: 'POST', body: JSON.stringify({ question, top_k }),
+    }),
 };
+
